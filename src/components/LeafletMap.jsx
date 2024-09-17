@@ -7,7 +7,19 @@ import { LuNavigation2 } from "react-icons/lu";
 import { setWeatherData } from '../store/globalSlice';
 import getWeather from '../data/getWeather';
 
+// Importing custom marker images
+import customMarkerIcon from '/marker.png';
+import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 
+// Creating a custom icon
+const customIcon = new L.Icon({
+    iconUrl: customMarkerIcon,
+    shadowUrl: markerShadow,
+    iconSize: [40, 41], // Set the size of the icon
+    iconAnchor: [12, 41], // Point where the icon's bottom meets the map
+    popupAnchor: [1, -34], // Point where the popup should open relative to the iconAnchor
+    shadowSize: [41, 41]
+});
 
 const MapWithCentering = ({ coords }) => {
     const map = useMap();
@@ -18,7 +30,7 @@ const MapWithCentering = ({ coords }) => {
         }
     }, [coords, map]);
 
-    return <Marker position={[coords.lat, coords.lon]} />;
+    return <Marker position={[coords.lat, coords.lon]}  icon={customIcon} />;
 };
 
 
